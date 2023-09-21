@@ -1,14 +1,13 @@
 import logging
-import struct
 import time
-from dataclasses import dataclass, field
-from datetime import datetime
-from typing import Optional
+from dataclasses import dataclass
 import socket
 
 import modbus_tk
 import modbus_tk.defines as cst
-from modbus_tk import modbus_tcp, hooks
+from modbus_tk import modbus_tcp
+
+import config
 
 
 @dataclass
@@ -162,11 +161,11 @@ def init_service():
             start_addr=12,
             data_format='>' + 'h' * (112 - 12 + 2))
     ]
-    dh = DataHolder(host='192.168.0.16:5204', mb_map=mb_map, logger=logging.getLogger(f'service.server_{server_name}'))
+    dh = DataHolder(host=config.LINE1_HOST, mb_map=mb_map, logger=logging.getLogger(f'service.server_{server_name}'))
     data_holders[server_name] = dh
 
     server_name = '2'
-    dh = DataHolder(host='192.168.0.16:5204', mb_map=mb_map, logger=logging.getLogger(f'service.server_{server_name}'))
+    dh = DataHolder(host=config.LINE2_HOST, mb_map=mb_map, logger=logging.getLogger(f'service.server_{server_name}'))
     data_holders[server_name] = dh
 
     # server_name = '3'
