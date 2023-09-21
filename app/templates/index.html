@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="https://hammerjs.github.io/dist/hammer.min.js"></script>
+</head>
+<body>
+  <div id="app">
+    <div class="container">
+      <h5>{{ serverName }}</h5>
+
+      <div class="btn-group" role="group" aria-label="Basic example">
+        <button class="btn btn-secondary" type="button"
+                v-for="(name, id) in servers" :key="id" @click="changeServerId(id)">{{ name }}</button>
+      </div>
+
+      <div class="card-body">
+
+        <table class="table align-middle table-nowrap mb-0">
+           <thead class="table-light">
+              <tr>
+                <th class="align-middle">Параметр</th>
+                <th class="align-middle">Значение</th>
+              </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(param, index) in params" :key="index">
+              <td>{{ param.name }} </td>
+              <td>{{ param.value }}
+                <span v-if="param.status == 0">&#9888;</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

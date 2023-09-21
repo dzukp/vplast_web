@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+
+  backend:
+    build: ./
+    ports:
+      - 80:8000
+    volumes:
+      - ./app:/app
+    # command: /app/run.sh
+
+
