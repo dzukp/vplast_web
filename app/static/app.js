@@ -9,9 +9,9 @@ const app = Vue.createApp({
       params: [],
       serverId: 1,
       servers: {
-        1: 'Первый',
-        2: 'Второй',
-        3: 'Третий',
+        1: 'Линия 1',
+        2: 'Линия 2',
+        3: 'Линия 3',
       }
     };
   },
@@ -51,7 +51,7 @@ const app = Vue.createApp({
         console.error('Ошибка при получении данных:', error);
       }
 
-      setTimeout(this.fetchData, 500); // Повторяем запрос каждые 200 мс
+      setTimeout(this.fetchData, 500);
     },
 
     changeServerId(newServerId) {
