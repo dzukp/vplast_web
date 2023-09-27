@@ -162,7 +162,7 @@ def init_service():
                 MapItem(address=0, name='Счетчик', id='counter', format='>H')
             ],
             quantity=1,
-            start_addr=1,
+            start_addr=0,
             data_format='>H',
             func=cst.READ_INPUT_REGISTERS)
     ]
