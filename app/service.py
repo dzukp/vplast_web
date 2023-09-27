@@ -82,7 +82,7 @@ class DataHolder:
         self.mb_init()
 
     def mb_init(self):
-        self.logger.debug('mb_init')
+        self.logger.debug(f'mb_init host={self.host}, port={self.port}')
         self.mb_master = modbus_tcp.TcpMaster(host=self.host, port=self.port, timeout_in_sec=0.25)
 
     def map_init(self, mb_map):
@@ -100,7 +100,7 @@ class DataHolder:
                 data = self.mb_master.execute(1, m.func, m.start_addr, m.quantity, m.data_format)
                 self.logger.debug(data)
             except socket.timeout:
-                self.logger.error('socket timeout')
+                self.logger.error(f'socket timeout host={self.host}, port={self.port}')
             except Exception:
                 self.logger.exception('')
             else:
@@ -141,16 +141,16 @@ def init_service():
         ),
         MbMapItem(
             items=[
-                MapItem(address=112, name='Т11', id='t2', format='>h', k=0.1),
-                MapItem(address=102, name='Т10', id='t3', format='>h', k=0.1),
-                MapItem(address=92, name='Т9', id='t4', format='>h', k=0.1),
-                MapItem(address=82, name='Т8', id='t5', format='>h', k=0.1),
-                MapItem(address=72, name='Т7', id='t6', format='>h', k=0.1),
-                MapItem(address=62, name='Т6', id='t7', format='>h', k=0.1),
-                MapItem(address=52, name='Т5', id='t8', format='>h', k=0.1),
-                MapItem(address=42, name='Т4', id='t9', format='>h', k=0.1),
-                MapItem(address=32, name='Т3', id='t10', format='>h', k=0.1),
                 MapItem(address=22, name='Т2', id='t11', format='>h', k=0.1),
+                MapItem(address=32, name='Т3', id='t10', format='>h', k=0.1),
+                MapItem(address=42, name='Т4', id='t9', format='>h', k=0.1),
+                MapItem(address=52, name='Т5', id='t8', format='>h', k=0.1),
+                MapItem(address=62, name='Т6', id='t7', format='>h', k=0.1),
+                MapItem(address=72, name='Т7', id='t6', format='>h', k=0.1),
+                MapItem(address=82, name='Т8', id='t5', format='>h', k=0.1),
+                MapItem(address=92, name='Т9', id='t4', format='>h', k=0.1),
+                MapItem(address=102, name='Т10', id='t3', format='>h', k=0.1),
+                MapItem(address=112, name='Т11', id='t2', format='>h', k=0.1),
                 MapItem(address=12, name='Т12', id='t12', format='>h', k=0.1),
             ],
             quantity=112 - 12 + 2,
@@ -178,7 +178,7 @@ def init_service():
         MbMapItem(
             items=[
                 MapItem(address=1, name='Экструдер', id='extruder', format='>h'),
-                MapItem(address=2, name='Соэкструдер', id='coextruder', format='>h'),
+                MapItem(address=2, name='Коэкструдер', id='coextruder', format='>h'),
                 MapItem(address=3, name='Протяжка', id='pulling', format='>h'),
                 MapItem(address=4, name='Т1', id='t1', format='>h'),
                 MapItem(address=5, name='Т2', id='t2', format='>h'),
