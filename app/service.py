@@ -66,7 +66,7 @@ class MbMapItem:
 
 class DataHolder:
 
-    def __init__(self, host: str, mb_map: list[MbMapItem], logger):
+    def __init__(self, host: str, mb_map: list[MbMapItem], logger, **kwargs):
         try:
             self.host = host.split(':')[0]
             self.port = int(host.split(':')[1])
@@ -75,7 +75,7 @@ class DataHolder:
             self.port = 502
         self.logger = logger
         self.last_update = 0
-        self.min_period = 0.5
+        self.min_period = kwargs.get('min_period', 0.5)
         self.mb_master = None
         self.data = {}
         self.mb_map = self.map_init(mb_map)
@@ -205,6 +205,7 @@ def init_service():
             data_format='>' + 'h' * 25,
             func=cst.READ_HOLDING_REGISTERS)
     ]
-    dh = DataHolder(host=config.LINE3_HOST, mb_map=mb_map, logger=logging.getLogger(f'service.server_{server_name}'))
+    dh = DataHolder(host=config.LINE3_HOST, mb_map=mb_map, logger=logging.getLogger(f'service.server_{server_name}'),
+                    min_period=1.5)
     data_holders[server_name] = dh
     return data_holders
