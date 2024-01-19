@@ -126,7 +126,7 @@ class DataHolder:
 def init_service():
     logger = modbus_tk.utils.create_logger("console", level=logging.DEBUG)
     data_holders = {}
-    server_name = '1'
+    server_name = '3'
     mb_map = [
         MbMapItem(
             items=[
@@ -173,7 +173,7 @@ def init_service():
     dh = DataHolder(host=config.LINE2_HOST, mb_map=mb_map, logger=logging.getLogger(f'service.server_{server_name}'))
     data_holders[server_name] = dh
 
-    server_name = '3'
+    server_name = '1'
     mb_map = [
         MbMapItem(
             items=[
